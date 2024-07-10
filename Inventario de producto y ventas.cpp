@@ -60,6 +60,26 @@ void listarProductos(const Producto productos[], int totalProductos) {
     }
 }
 
+void buscarProducto(const Producto productos[], int totalProductos) {
+    if (totalProductos == 0) {
+        cout << "\nNo hay productos registrados." << endl;
+        return;
+    }
+    string nombreBuscado;
+    cout << "\nIngrese el nombre del producto a buscar: ";
+    cin >> nombreBuscado;
+    for (int i = 0; i < totalProductos; i++) {
+        if (productos[i].nombre == nombreBuscado) {
+            cout << "\nProducto encontrado:" << endl;
+            cout << "Nombre: " << productos[i].nombre << endl;
+            cout << "Precio: " << productos[i].precio << endl;
+            cout << endl;
+            return;
+        }
+    }
+    cout << "\nProducto no encontrado." << endl;
+}
+
 int main() {
     Producto productos[maxProductos];
     Venta ventas[maxVentas];
@@ -73,7 +93,8 @@ int main() {
         cout << "1. Agregar un nuevo producto" << endl;
         cout << "2. Registrar una venta" << endl;
         cout << "3. Listar productos registrados" << endl;
-        cout << "4. Salir del programa" << endl;
+        cout << "4. Buscar un producto por nombre" << endl;
+        cout << "5. Salir del programa" << endl;
         cout << "Selecciona una opción: ";
         cin >> opcion;
 
@@ -88,13 +109,16 @@ int main() {
                 listarProductos(productos, totalProductos);
                 break;
             case 4:
+                buscarProducto(productos, totalProductos);
+                break;
+            case 5:
                 cout << "Saliendo del programa..." << endl;
                 break;
             default:
-                cout << "Opción no válida, selecciona una opción del 1 al 4." << endl;
+                cout << "Opción no válida, selecciona una opción del 1 al 5." << endl;
                 break;
         }
-    } while (opcion != 4);
+    } while (opcion != 5);
 
     return 0;
 }
