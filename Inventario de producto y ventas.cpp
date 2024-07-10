@@ -107,6 +107,37 @@ void actualizarProducto(Producto productos[], int totalProductos) {
     cout << "\nProducto no encontrado." << endl;
 }
 
+void eliminarProducto(Producto productos[], int &totalProductos) {
+    if (totalProductos == 0) {
+        cout << "\nNo hay productos registrados." << endl;
+        return;
+    }
+    string nombreEliminar;
+    cout << "\nIngrese el nombre del producto a eliminar: ";
+    cin >> nombreEliminar;
+
+    int indiceEliminar = -1;
+    for (int i = 0; i < totalProductos; i++) {
+        if (productos[i].nombre == nombreEliminar) {
+            indiceEliminar = i;
+            break;
+        }
+    }
+
+    if (indiceEliminar == -1) {
+        cout << "\nProducto no encontrado." << endl;
+        return;
+    }
+
+    // Eliminar el producto moviendo los elementos
+    for (int i = indiceEliminar; i < totalProductos - 1; i++) {
+        productos[i] = productos[i + 1];
+    }
+
+    totalProductos--;
+    cout << "\nProducto eliminado correctamente." << endl;
+}
+
 int main() {
     Producto productos[maxProductos];
     Venta ventas[maxVentas];
@@ -122,7 +153,8 @@ int main() {
         cout << "3. Listar productos registrados" << endl;
         cout << "4. Buscar un producto por nombre" << endl;
         cout << "5. Actualizar datos de un producto" << endl;
-        cout << "6. Salir del programa" << endl;
+        cout << "6. Eliminar un producto" << endl;
+        cout << "7. Salir del programa" << endl;
         cout << "Selecciona una opción: ";
         cin >> opcion;
 
@@ -143,13 +175,16 @@ int main() {
                 actualizarProducto(productos, totalProductos);
                 break;
             case 6:
+                eliminarProducto(productos, totalProductos);
+                break;
+            case 7:
                 cout << "Saliendo del programa..." << endl;
                 break;
             default:
-                cout << "Opción no válida, selecciona una opción del 1 al 6." << endl;
+                cout << "Opción no válida, selecciona una opción del 1 al 7." << endl;
                 break;
         }
-    } while (opcion != 6);
+    } while (opcion != 7);
 
     return 0;
 }
