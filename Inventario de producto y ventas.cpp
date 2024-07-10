@@ -129,13 +129,28 @@ void eliminarProducto(Producto productos[], int &totalProductos) {
         return;
     }
 
-    // Eliminar el producto moviendo los elementos
     for (int i = indiceEliminar; i < totalProductos - 1; i++) {
         productos[i] = productos[i + 1];
     }
 
     totalProductos--;
     cout << "\nProducto eliminado correctamente." << endl;
+}
+
+void listarVentas(const Venta ventas[], int totalVentas) {
+    if (totalVentas == 0) {
+        cout << "\nNo hay ventas registradas." << endl;
+        return;
+    }
+    cout << "\nLista de ventas realizadas:" << endl;
+    for (int i = 0; i < totalVentas; i++) {
+        cout << "Venta " << (i + 1) << ": " << endl;
+        cout << "ID de venta: " << ventas[i].idVenta << endl;
+        cout << "Producto vendido: " << ventas[i].producto << endl;
+        cout << "Cantidad vendida: " << ventas[i].cantidad << endl;
+        cout << "Precio total: " << ventas[i].precioTotal << endl;
+        cout << endl;
+    }
 }
 
 int main() {
@@ -154,7 +169,8 @@ int main() {
         cout << "4. Buscar un producto por nombre" << endl;
         cout << "5. Actualizar datos de un producto" << endl;
         cout << "6. Eliminar un producto" << endl;
-        cout << "7. Salir del programa" << endl;
+        cout << "7. Listar ventas realizadas" << endl;
+        cout << "8. Salir del programa" << endl;
         cout << "Selecciona una opción: ";
         cin >> opcion;
 
@@ -178,13 +194,16 @@ int main() {
                 eliminarProducto(productos, totalProductos);
                 break;
             case 7:
+                listarVentas(ventas, totalVentas);
+                break;
+            case 8:
                 cout << "Saliendo del programa..." << endl;
                 break;
             default:
-                cout << "Opción no válida, selecciona una opción del 1 al 7." << endl;
+                cout << "Opción no válida, selecciona una opción del 1 al 8." << endl;
                 break;
         }
-    } while (opcion != 7);
+    } while (opcion != 8);
 
     return 0;
 }
