@@ -153,6 +153,14 @@ void listarVentas(const Venta ventas[], int totalVentas) {
     }
 }
 
+float calcularTotalVentas(const Venta ventas[], int totalVentas) {
+    float total = 0;
+    for (int i = 0; i < totalVentas; i++) {
+        total += ventas[i].precioTotal;
+    }
+    return total;
+}
+
 int main() {
     Producto productos[maxProductos];
     Venta ventas[maxVentas];
@@ -170,7 +178,8 @@ int main() {
         cout << "5. Actualizar datos de un producto" << endl;
         cout << "6. Eliminar un producto" << endl;
         cout << "7. Listar ventas realizadas" << endl;
-        cout << "8. Salir del programa" << endl;
+        cout << "8. Calcular total de ventas realizadas" << endl;
+        cout << "9. Salir del programa" << endl;
         cout << "Selecciona una opción: ";
         cin >> opcion;
 
@@ -197,13 +206,16 @@ int main() {
                 listarVentas(ventas, totalVentas);
                 break;
             case 8:
+                cout << "\nEl total de ventas realizadas es: $" << calcularTotalVentas(ventas, totalVentas) << endl;
+                break;
+            case 9:
                 cout << "Saliendo del programa..." << endl;
                 break;
             default:
-                cout << "Opción no válida, selecciona una opción del 1 al 8." << endl;
+                cout << "Opción no válida, selecciona una opción del 1 al 9." << endl;
                 break;
         }
-    } while (opcion != 8);
+    } while (opcion != 9);
 
     return 0;
 }
